@@ -12,7 +12,7 @@ interface IZodErrorMessage {
 const envSchema = z.object({
   NODE_ENV: z.enum(["dev", "test", "prod"]).default("prod"),
   PORT: z.coerce.number().default(8080),
-  HOST: z.string()
+  HOST: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);
