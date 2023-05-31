@@ -15,7 +15,9 @@
   "author": "Tiago Araujo",
   "license": "ISC",
   "dependencies": {
-    "fastify": "4.17.0"
+    "dotenv": "16.1.1",
+    "fastify": "4.17.0",
+    "zod": "3.21.4"
   },
   "devDependencies": {
     "@types/node": "20.2.5",
