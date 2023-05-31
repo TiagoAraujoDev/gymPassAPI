@@ -1,0 +1,13 @@
+# Dependencies
+node_modules
+
+# Build
+build
+
+# Environment
+.env
+.env.test
+
+# Vscode settings
+.vscode
+
