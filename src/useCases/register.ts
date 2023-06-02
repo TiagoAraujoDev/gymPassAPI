@@ -10,8 +10,8 @@ interface IRegisterUseCaseDTO {
 }
 
 class RegisterUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
-  
+  constructor(private usersRepository: IUsersRepository) { }
+
   async execute({ name, email, password }: IRegisterUseCaseDTO) {
     const emailAlreadyRegister = await this.usersRepository.findByEmail(email);
 

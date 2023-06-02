@@ -22,12 +22,10 @@ app.setErrorHandler((error, _request, reply) => {
     // Here we should log to a external tool like DataDog/NewRelic/Sentry
   }
 
-  return reply
-    .status(500)
-    .send({
-      message: "Internal server error!",
-      code: error.code,
-      name: error.name,
-      error: error.message,
-    });
+  return reply.status(500).send({
+    message: "Internal server error!",
+    code: error.code,
+    name: error.name,
+    error: error.message,
+  });
 });
