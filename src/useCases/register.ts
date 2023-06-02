@@ -1,6 +1,6 @@
 import { hash } from "bcryptjs";
 
-import { PrismaUsersRepository } from "@/repositories/prismaUsersRepository";
+import { IUsersRepository } from "@/repositories/interfaces/IUsersRepository";
 
 interface IRegisterUseCaseDTO {
   name: string;
@@ -8,23 +8,24 @@ interface IRegisterUseCaseDTO {
   password: string;
 }
 
-async function registerUseCase({ name, email, password }: IRegisterUseCaseDTO) {
-  const prismaUsersRepository = new PrismaUsersRepository();
+class RegisterUseCase {
+  constructor(private usersRepository: IUsersRepository) {}
   
-  const emailAlreadyRegister = await prismaUsersRepository.findByEmail(email);
-  
-  if (emailAlreadyRegister) {
-    throw new Error("Email already register!");
+  async execute({ name, email, password }: IRegisterUseCaseDTO) {
+    const emailAlreadyRegister = await this.usersRepository.findByEmail(email);
+
+    if (emailAlreadyRegister) {
+      throw new Error("Email already register!");
+    }
+
+    const password_hash = await hash(password, 6);
+
+    await this.usersRepository.create({
+      name,
+      email,
+      password_hash,
+    });
   }
-
-  const password_hash = await hash(password, 6);
-
-
-  await prismaUsersRepository.create({
-    name,
-    email,
-    password_hash,
-  });
 }
 
-export { registerUseCase };
+export { RegisterUseCase };
