@@ -12,6 +12,8 @@
     "build": "tsup src --out-dir build",
     "test": "vitest run",
     "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
   },
   "keywords": [],
   "author": "Tiago Araujo",
