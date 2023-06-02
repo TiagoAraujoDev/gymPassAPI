@@ -3,12 +3,13 @@ import { z } from "zod";
 
 import { RegisterUseCase } from "@/useCases/register";
 import { PrismaUsersRepository } from "@/repositories/prisma/prismaUsersRepository";
+import { UserAlreadyExistError } from "@/useCases/error/userAlreadyExistError";
 
 async function register(request: FastifyRequest, reply: FastifyReply) {
   const bodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
-    password: z.string(),
+    password: z.string().min(6),
   });
 
   const { name, email, password } = bodySchema.parse(request.body);
@@ -17,9 +18,13 @@ async function register(request: FastifyRequest, reply: FastifyReply) {
     const usersRepository = new PrismaUsersRepository();
     const registerUseCase = new RegisterUseCase(usersRepository);
 
-    await registerUseCase.execute({ name, email, password});
+    await registerUseCase.execute({ name, email, password });
   } catch (err) {
-    return reply.status(409).send();
+    if (err instanceof UserAlreadyExistError) {
+      return reply.status(409).send({ message: err.message });
+    }
+
+    throw err;
   }
 
   return reply.status(201).send();

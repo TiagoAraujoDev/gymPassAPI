@@ -1,6 +1,7 @@
 import { hash } from "bcryptjs";
 
 import { IUsersRepository } from "@/repositories/interfaces/IUsersRepository";
+import { UserAlreadyExistError } from "./error/userAlreadyExistError";
 
 interface IRegisterUseCaseDTO {
   name: string;
@@ -15,7 +16,7 @@ class RegisterUseCase {
     const emailAlreadyRegister = await this.usersRepository.findByEmail(email);
 
     if (emailAlreadyRegister) {
-      throw new Error("Email already register!");
+      throw new UserAlreadyExistError();
     }
 
     const password_hash = await hash(password, 6);
