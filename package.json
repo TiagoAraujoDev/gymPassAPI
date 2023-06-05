@@ -12,6 +12,7 @@
     "build": "tsup src --out-dir build",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix"
   },
@@ -30,6 +31,7 @@
     "@types/node": "20.2.5",
     "@typescript-eslint/eslint-plugin": "5.59.8",
     "@typescript-eslint/parser": "5.59.8",
+    "@vitest/coverage-c8": "0.31.4",
     "eslint": "8.41.0",
     "prisma": "4.15.0",
     "tsup": "6.7.0",
