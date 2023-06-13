@@ -1,5 +1,6 @@
 import { randomUUID as uuid } from "crypto";
 import { Prisma, User } from "@prisma/client";
+
 import { IUsersRepository } from "../interfaces/IUsersRepository";
 
 class InMemoryUsersRepository implements IUsersRepository {
@@ -25,6 +26,14 @@ class InMemoryUsersRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<User | null> {
     const user = this.users.find((user) => {
       return user.email === email;
+    });
+
+    return user ?? null;
+  }
+
+  async findById(userId: string): Promise<User | null> {
+    const user = this.users.find((user) => {
+      return user.id === userId;
     });
 
     return user ?? null;
