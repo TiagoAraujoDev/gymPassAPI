@@ -6,7 +6,7 @@ import { IUsersRepository } from "@/repositories/interfaces/IUsersRepository";
 import { InvalidCredentialsError } from "./error/invalidCredentialsError";
 import { AuthenticationUseCase } from "./authentication";
 
-let usersRepository: IUsersRepository; 
+let usersRepository: IUsersRepository;
 let sut: AuthenticationUseCase;
 
 describe("Authentication useCase", () => {
@@ -14,7 +14,7 @@ describe("Authentication useCase", () => {
     usersRepository = new InMemoryUsersRepository();
     sut = new AuthenticationUseCase(usersRepository);
   });
-  
+
   it("should be able to authenticate user", async () => {
     await usersRepository.create({
       name: "Jonh Doe",
@@ -31,14 +31,14 @@ describe("Authentication useCase", () => {
   });
 
   it("should not be able to authenticate a user that doesn't exist", async () => {
-    expect(() =>
+    await expect(() =>
       sut.execute({
         email: "jonhdoe@example.com",
         password: "123456",
       }),
     ).rejects.toBeInstanceOf(InvalidCredentialsError);
   });
-  
+
   it("should not be able to authenticate a user with a wrong password", async () => {
     await usersRepository.create({
       name: "Jonh Doe",
@@ -46,7 +46,7 @@ describe("Authentication useCase", () => {
       password_hash: await hash("123456", 6),
     });
 
-    expect(() =>
+    await expect(() =>
       sut.execute({
         email: "jonhdoe@example.com",
         password: "123123",
