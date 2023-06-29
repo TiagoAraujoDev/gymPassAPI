@@ -2,10 +2,11 @@ import { CheckIn } from "@prisma/client";
 
 import { ICheckInsRepository } from "@/repositories/interfaces/ICheckInsRepository";
 import { IGymsRepository } from "@/repositories/interfaces/IGymsRepository";
-import { ResourceNotFoundError } from "./error/resourceNotFoundError";
 import { getDistanceBetweenCoordinates } from "@/utils/getDistanceBetweenCoordanetes";
+
 import { MaxDistanceError } from "./error/maxDistanceError";
 import { MaxNumberOfCheckInsError } from "./error/maxNumberOfCheckInsError";
+import { ResourceNotFoundError } from "./error/resourceNotFoundError";
 
 interface ICheckInUseCaseRequest {
   userId: string;

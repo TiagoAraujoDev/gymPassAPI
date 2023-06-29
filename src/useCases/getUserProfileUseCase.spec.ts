@@ -1,11 +1,12 @@
+import { hash } from "bcryptjs";
 import { randomUUID as uuid } from "crypto";
 import { beforeEach, describe, expect, it } from "vitest";
-import { hash } from "bcryptjs";
 
-import { GetUserProfileUseCase } from "./getUserProfileUseCase";
 import { InMemoryUsersRepository } from "@/repositories/inMemory/inMemoryUsersRepository";
 import { IUsersRepository } from "@/repositories/interfaces/IUsersRepository";
+
 import { ResourceNotFoundError } from "./error/resourceNotFoundError";
+import { GetUserProfileUseCase } from "./getUserProfileUseCase";
 
 let usersRepository: IUsersRepository;
 let sut: GetUserProfileUseCase;

@@ -1,14 +1,15 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { Decimal } from "@prisma/client/runtime/library";
 import { Gym } from "@prisma/client";
+import { Decimal } from "@prisma/client/runtime/library";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import { InMemoryCheckInsRepository } from "@/repositories/inMemory/inMemoryCheckInsRepository";
+import { InMemoryGymsRepository } from "@/repositories/inMemory/inMemoryGymsRepository";
+import { ICheckInsRepository } from "@/repositories/interfaces/ICheckInsRepository";
+import { IGymsRepository } from "@/repositories/interfaces/IGymsRepository";
 
 import { CheckInUseCase } from "./checkIn";
-import { ICheckInsRepository } from "@/repositories/interfaces/ICheckInsRepository";
-import { InMemoryCheckInsRepository } from "@/repositories/inMemory/inMemoryCheckInsRepository";
-import { IGymsRepository } from "@/repositories/interfaces/IGymsRepository";
-import { InMemoryGymsRepository } from "@/repositories/inMemory/inMemoryGymsRepository";
-import { MaxNumberOfCheckInsError } from "./error/maxNumberOfCheckInsError";
 import { MaxDistanceError } from "./error/maxDistanceError";
+import { MaxNumberOfCheckInsError } from "./error/maxNumberOfCheckInsError";
 
 let checkInsRepository: ICheckInsRepository;
 let gymsRepository: IGymsRepository;

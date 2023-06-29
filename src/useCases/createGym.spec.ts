@@ -1,8 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { CreateGymUseCase } from "./createGym";
-import { IGymsRepository } from "@/repositories/interfaces/IGymsRepository";
 import { InMemoryGymsRepository } from "@/repositories/inMemory/inMemoryGymsRepository";
+import { IGymsRepository } from "@/repositories/interfaces/IGymsRepository";
+
+import { CreateGymUseCase } from "./createGym";
 
 let gymsRepository: IGymsRepository;
 let sut: CreateGymUseCase;

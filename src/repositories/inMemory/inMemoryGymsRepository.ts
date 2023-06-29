@@ -1,6 +1,6 @@
-import { randomUUID as uuid } from "crypto";
 import { Gym, Prisma } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
+import { randomUUID as uuid } from "crypto";
 
 import { IGymsRepository } from "../interfaces/IGymsRepository";
 

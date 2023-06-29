@@ -1,5 +1,5 @@
-import { randomUUID as uuid } from "crypto";
 import { Prisma, User } from "@prisma/client";
+import { randomUUID as uuid } from "crypto";
 
 import { IUsersRepository } from "../interfaces/IUsersRepository";
 

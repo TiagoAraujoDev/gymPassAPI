@@ -1,6 +1,7 @@
 import { User } from "@prisma/client";
 
 import { IUsersRepository } from "@/repositories/interfaces/IUsersRepository";
+
 import { ResourceNotFoundError } from "./error/resourceNotFoundError";
 
 interface IGetUserProfileUseCaseRequest {
