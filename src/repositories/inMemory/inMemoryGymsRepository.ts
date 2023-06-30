@@ -47,8 +47,6 @@ class InMemoryGymsRepository implements IGymsRepository {
         },
       );
 
-      console.log(distance);
-
       return distance < MAX_DISTANCE_IN_kILOMETERS;
     });
 
