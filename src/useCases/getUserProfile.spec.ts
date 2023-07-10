@@ -6,7 +6,7 @@ import { InMemoryUsersRepository } from "@/repositories/inMemory/inMemoryUsersRe
 import { IUsersRepository } from "@/repositories/interfaces/IUsersRepository";
 
 import { ResourceNotFoundError } from "./error/resourceNotFoundError";
-import { GetUserProfileUseCase } from "./getUserProfileUseCase";
+import { GetUserProfileUseCase } from "./getUserProfile";
 
 let usersRepository: IUsersRepository;
 let sut: GetUserProfileUseCase;
