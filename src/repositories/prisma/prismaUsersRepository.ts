@@ -22,7 +22,7 @@ class PrismaUsersRepository implements IUsersRepository {
 
     return user;
   }
-  
+
   async findById(userId: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {
