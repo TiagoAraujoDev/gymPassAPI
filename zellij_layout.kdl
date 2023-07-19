@@ -1,0 +1,56 @@
+layout {
+  tab name="nvim" {
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+    pane command="nvim" {
+      borderless true  
+    }
+    floating_panes {
+      pane command="npm" {
+        args "run" "test"  
+        start_suspended true
+        name "TEST"
+      }
+      pane name="HTTPie"  
+      pane name="git"
+    }
+    pane size=2 borderless=true {
+      plugin location="zellij:status-bar"
+    }
+  }
+  tab name="server/logs" focus=true {
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+    pane split_direction="vertical" {
+      pane name="commands"
+      pane stacked=true {
+        pane command="docker" {
+          args "compose" "up"
+          name "Docker"   
+          start_suspended true
+        }
+        pane command="npm" {
+          args "run" "dev"
+          start_suspended true
+          name "application"    
+        }
+      }
+    }
+    pane size=2 borderless=true {
+      plugin location="zellij:status-bar"
+    }
+  }
+  tab name="btop" {
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+    pane command="btop" {
+      borderless true 
+    }
+    pane size=2 borderless=true {
+      plugin location="zellij:status-bar"
+    }
+  }
+}
