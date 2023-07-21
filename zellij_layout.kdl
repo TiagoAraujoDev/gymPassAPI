@@ -13,7 +13,7 @@ layout {
         name "TEST (unity)"
       }
       pane command="npm" {
-        args "run" "test:e2e"  
+        args "run" "test:e2e:watch"  
         start_suspended true
         name "TEST (e2e)"
       }
