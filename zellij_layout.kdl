@@ -10,7 +10,12 @@ layout {
       pane command="npm" {
         args "run" "test"  
         start_suspended true
-        name "TEST"
+        name "TEST (unity)"
+      }
+      pane command="npm" {
+        args "run" "test:e2e"  
+        start_suspended true
+        name "TEST (e2e)"
       }
       pane name="HTTPie"  
       pane name="git"
