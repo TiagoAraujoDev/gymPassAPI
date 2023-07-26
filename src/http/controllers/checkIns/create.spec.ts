@@ -37,18 +37,17 @@ describe("CheckIns (e2e)", () => {
 
     const gymId = _response.body.gyms[0].id;
     
-    
-    // BUG: Route note found - 404
     const response = await request(app.server)
-      .post(`/gyms/${gymId}/check-ins`) // "/gyms/:gymId/check-ins"
+      .post(`/gyms/${gymId}/check-ins`)
       .set("Authorization", `Bearer ${token}`)
       .send({
         latitude: 1,
         longitude: 1,
       });
 
-    console.log(response.body);
-    
     expect(response.status).toEqual(201);
+    expect(response.body.checkIn).toEqual(expect.objectContaining({
+      gym_id: gymId,
+    }));
   });
 });
