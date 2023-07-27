@@ -11,14 +11,32 @@ layout {
         args "run" "test"  
         start_suspended true
         name "TEST (unity)"
+        x 15
+        y 2
+        height "85%"
+        width "80%"
       }
       pane command="npm" {
         args "run" "test:e2e:watch"  
         start_suspended true
         name "TEST (e2e)"
+        x 15
+        y 3
+        height "85%"
+        width "80%"
       }
-      pane name="HTTPie"  
-      pane name="git"
+      pane name="HTTPie" {
+        x 15
+        y 4
+        height "85%"
+        width "80%"
+      }  
+      pane name="git" {
+        x 15
+        y 5
+        height "85%"
+        width "80%"
+      }
     }
     pane size=2 borderless=true {
       plugin location="zellij:status-bar"
