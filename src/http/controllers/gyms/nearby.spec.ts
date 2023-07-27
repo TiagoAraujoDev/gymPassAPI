@@ -12,7 +12,7 @@ describe("Fetch nearby gyms (e2e)", () => {
   afterAll(() => {
     app.close();
   });
-  
+
   it("should be able to fetch nearby gyms", async () => {
     const token = await createAndAuthenticateUser(app);
 
@@ -20,24 +20,39 @@ describe("Fetch nearby gyms (e2e)", () => {
       .post("/gyms")
       .set("Authorization", `Bearer ${token}`)
       .send({
-        title: "GymTest",
-        description: "A gym for test",
+        title: "Near gym",
+        description: "Some description for test",
         phone: "912341234",
-        latitude: 1,
-        longitude: 1,
+        latitude: 41.1517155,
+        longitude: -8.6289733,
+      });
+
+    await request(app.server)
+      .post("/gyms")
+      .set("Authorization", `Bearer ${token}`)
+      .send({
+        title: "Faraway gym",
+        description: "Some description for test",
+        phone: "912341234",
+        latitude: 41.335727,
+        longitude: -8.595991,
       });
 
     const response = await request(app.server)
       .get("/gyms/nearby")
       .set("Authorization", `Bearer ${token}`)
       .query({
-        latitude: 1,
-        longitude: 1,
+        latitude: 41.1517155,
+        longitude: -8.6289733,
       })
       .send();
 
-    console.log(response.body.issues);
-
-    expect(response.status).toEqual(200);
+    expect(response.statusCode).toEqual(200);
+    expect(response.body.gyms).toHaveLength(1);
+    expect(response.body.gyms).toEqual([
+      expect.objectContaining({
+        title: "Near gym"
+      })
+    ]);
   });
 });
