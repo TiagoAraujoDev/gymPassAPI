@@ -4,7 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { app } from "@/app";
 import { createAndAuthenticateUser } from "@/utils/tests/createAndAuthenticateUser";
 
-describe("CheckIns (e2e)", () => {
+describe("Create check-in (e2e)", () => {
   beforeAll(() => {
     app.ready();
   });
@@ -13,41 +13,43 @@ describe("CheckIns (e2e)", () => {
     app.close();
   });
 
-  it("should be able to check in", async () => {
+  it("should be able to create a check-in", async () => {
     const token = await createAndAuthenticateUser(app);
 
     await request(app.server)
       .post("/gyms")
       .set("Authorization", `Bearer ${token}`)
       .send({
-        title: "GymTest",
-        description: "A gym for test",
+        title: "Test title",
+        description: "Some description for test",
         phone: "912341234",
-        latitude: 1,
-        longitude: 1,
+        latitude: -27.2092052,
+        longitude: -49.6401091,
       });
 
-    const _response = await request(app.server)
+    const searchResponse = await request(app.server)
       .get("/gyms/search")
       .set("Authorization", `Bearer ${token}`)
       .query({
-        query: "GymTest",
+        query: "Test title",
       })
       .send();
 
-    const gymId = _response.body.gyms[0].id;
-    
+    const gymId = searchResponse.body.gyms[0].id;
+
     const response = await request(app.server)
       .post(`/gyms/${gymId}/check-ins`)
       .set("Authorization", `Bearer ${token}`)
       .send({
-        latitude: 1,
-        longitude: 1,
+        latitude: -27.2092052,
+        longitude: -49.6401091,
       });
 
     expect(response.status).toEqual(201);
-    expect(response.body.checkIn).toEqual(expect.objectContaining({
-      gym_id: gymId,
-    }));
+    expect(response.body.checkIn).toEqual(
+      expect.objectContaining({
+        gym_id: gymId,
+      }),
+    );
   });
 });
