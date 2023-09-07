@@ -38,7 +38,7 @@ app.setErrorHandler((error, _request, reply) => {
     console.log(error);
   } else {
     // TODO:
-    // Here we should log to a external tool like DataDog/NewRelic/Sentry
+    // Here we should log to an external tool like DataDog/NewRelic/Sentry
   }
 
   return reply.status(500).send({
